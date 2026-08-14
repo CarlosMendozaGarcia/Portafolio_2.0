@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+
+:root {
+    
+}
+@font-face {
+    font-family: 'ServerMono';
+    src:url("/fonts/ServerMono-Regular.woff") format(woff);
+    font-weight: 400;
+    font-style: normal;
+}
+
+@theme inline {
+
+    --font-display: "ServerMono";
+    
+}
