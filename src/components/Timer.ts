@@ -11,14 +11,15 @@ export default function Timer(dateStart:string, dateEnd?:string ){
     const initialDate = new Date(dateStart);
     const msInitialDate = initialDate.getTime();
 
+    console.log(dateEnd)
     if(!dateEnd){
         const actualDate = Date.now()
         let diff = Math.floor((actualDate - msInitialDate) / day)
-        return {initDate: initialDate.toLocaleDateString("co-CO", options), actualDate: new Date(actualDate).toLocaleDateString("co-CO", options), diff: diff}
+        return {initDay: initialDate.toLocaleDateString("es-CO", options), actualDay: new Date(actualDate).toLocaleDateString("es-CO", options), diff: diff}
     }else{
         const endDate= new Date(dateEnd);
         const msEndDate = endDate.getTime();
         let diff =(msEndDate - msInitialDate) / day
-        return {initDate: initialDate.toLocaleDateString("co-CO", options), endDate: endDate.toLocaleDateString("co-CO", options), diff: diff}
+        return {initDay: initialDate.toLocaleDateString("es-CO", options), endDay: endDate.toLocaleDateString("es-CO", options), diff: diff}
     }
 }

@@ -1,47 +1,40 @@
 ---
-import Timer from "../components/Timer";
-
-const { initDate: firstDay, actualDate: lastDay, diff } = Timer("2025-10-14");
+import WorkCard from "../components/WorkCard.astro";
+const Jobs = [
+    {
+        id: 1,
+        company: "Arenas Inmobiliaria",
+        position: "Gestor de Desarrollo",
+        initialDate: "2025-10-14",
+    },
+    {
+        id: 2,
+        company: "RawForm",
+        position: "Desarrollador FrontEnd",
+        initialDate: "2026-02-14",
+        endDate: "2026-03-14"
+    },
+];
 ---
 
 <section class="w-full h-full">
     <div
         class="flex w-full h-full overflow-hidden snap-x snap-mandatory scroll-smooth"
     >
-        <div
-            class="shrink-0 flex justify-around items-center w-full h-full snap-start"
-        >
-            <div class="text-heading-md font-display">←</div>
-            <div
-                class="flex flex-col gap-2 items-start w-1/2 h-1/2 border-8 border-double px-4 py-2 rounded-md"
-            >
-                <h3
-                    class="leading-none font-headings text-heading-lg text-primary font-bold"
-                >
-                    Name Enterprise
-                </h3>
-                <h4
-                    class="font-headings text-heading-md text-primary font-semibold"
-                >
-                    Job Position
-                </h4>
-                <div class="w-full flex  justify-between font-display text-body">
-                    <div class="flex gap-2 ">
-                        <p>{firstDay}</p>
-                        - 
-                        <p>{lastDay}</p>
-                    </div>
-                    <p>{diff}</p>
+        {
+            Jobs.map((j) => (
+                <div class="shrink-0 flex justify-around items-center w-full h-full snap-start">
+                    <a  class={`${ j.id == 1 ? "opacity-0 pointer-events-none":"opacity-100"} text-heading-md font-display`} href={`#work_${j.id - 1}`}>←</a>
+                    <WorkCard
+                        id={j.id}
+                        company={j.company}
+                        position={j.position}
+                        initialDate={j.initialDate}
+                        endDate={j.endDate}
+                    />
+                    <a class={`${ j.id == Jobs.length ? "opacity-0 pointer-events-none":"opacity-100"} text-heading-md font-display`}href={`#work_${j.id + 1}`}>→</a>
                 </div>
-                <ul
-                    class="w-full flex flex-col items-start justify-around grow  list-disc list-inside"
-                >
-                    <li class="font-body text-heading-body">Skills</li>
-                    <li class="font-body text-heading-body">Skills</li>
-                    <li class="font-body text-heading-body">Skills</li>
-                </ul>
-            </div>
-            <div class="text-heading-md font-display">→</div>
-        </div>
+            ))
+        }
     </div>
 </section>

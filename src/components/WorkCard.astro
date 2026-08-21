@@ -1,0 +1,43 @@
+---
+import Timer from "./Timer";
+
+type Props = {
+    id: number;
+    company: string;
+    position: string;
+    initialDate: string;
+    endDate?: string;
+};
+const { id, company, position, initialDate, endDate } = Astro.props;
+
+const {initDay, actualDay, endDay, diff } = Timer(initialDate,endDate) ;
+
+---
+
+<div id={`work_${id}`}
+    class="flex flex-col gap-2 items-start w-1/2 h-1/2 border-8 border-double px-4 py-2 rounded-md"
+>
+    <h3
+        class="leading-none font-headings text-heading-lg text-primary font-bold"
+    >
+        {company}
+    </h3>
+    <h4 class="font-headings text-heading-md text-primary  font-semibold">
+        {position}
+    </h4>
+    <div class="w-full flex justify-between font-display text-body">
+        <div class="flex gap-2">
+            <p>{initDay}</p>
+            -
+            <p>{(!endDay) ? actualDay : endDay}</p>
+        </div>
+        <p>{diff} dias</p>
+    </div>
+    <ul
+        class="w-full flex flex-col items-start justify-around grow list-disc list-inside"
+    >
+        <li class="font-body text-heading-body">Skills</li>
+        <li class="font-body text-heading-body">Skills</li>
+        <li class="font-body text-heading-body">Skills</li>
+    </ul>
+</div>
