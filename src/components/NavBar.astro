@@ -1,6 +1,8 @@
-<nav class="w-1/2 flex justify-between items-center border-2 rounded-sm px-2 backdrop-blur-sm bg-primary/20">
-    <div>
-        <ul>
+<nav 
+    class="w-1/2 flex justify-between items-center border-2 rounded-sm px-2 backdrop-blur-sm bg-primary/20"
+>
+    <div >
+        <ul class="flex gap-2 font-headings">
             <a href="#Home">Home</a>
             <a href="#Experience">Experiencia</a>
             <a href="#Technologie">Tecnologias</a>
@@ -9,4 +11,27 @@
     </div>
     <div>Get my cv</div>
 </nav>
-<!-- utilizar gsap para el scroll section -->
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+    gsap.registerPlugin(ScrollToPlugin);
+
+    const links = document.querySelectorAll<HTMLAnchorElement>("nav a");
+
+    function scrollSection(ref: string) {
+        gsap.to(window, { duration: 1, scrollTo: ref, ease: "power2.inOut" });
+    }
+
+    links.forEach((element) => {
+        const href = element.getAttribute("href") ?? "";
+
+        if (!href.startsWith("#")) return;
+
+        element.addEventListener("click", (e) => {
+            e.preventDefault();
+            scrollSection(href);
+        });
+    });
+</script>

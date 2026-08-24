@@ -12,29 +12,64 @@ const Jobs = [
         company: "RawForm",
         position: "Desarrollador FrontEnd",
         initialDate: "2026-02-14",
-        endDate: "2026-03-14"
+        endDate: "2026-03-14",
     },
 ];
 ---
 
 <section id="Experience" class="w-full h-full">
-    <div
-        class="flex w-full h-full overflow-hidden snap-x snap-mandatory scroll-smooth"
-    >
+    <div id="Slider" class="flex w-full h-full overflow-hidden">
         {
             Jobs.map((j) => (
-                <div class="shrink-0 flex justify-around items-center w-full h-full snap-start">
-                    <a  class={`${ j.id == 1 ? "opacity-0 pointer-events-none":"opacity-100"} text-heading-md font-display`} href={`#work_${j.id - 1}`}>←</a>
+                <div id={`work_${j.id}`} class="shrink-0 flex justify-around items-center w-full h-full snap-start">
+                    <a
+                        class={`${j.id == 1 ? "opacity-0 pointer-events-none" : "opacity-100"} text-heading-md font-display`}
+                        href={`#work_${j.id - 1}`}
+                    >
+                        ←
+                    </a>
                     <WorkCard
-                        id={j.id}
                         company={j.company}
                         position={j.position}
                         initialDate={j.initialDate}
                         endDate={j.endDate}
                     />
-                    <a class={`${ j.id == Jobs.length ? "opacity-0 pointer-events-none":"opacity-100"} text-heading-md font-display`}href={`#work_${j.id + 1}`}>→</a>
+                    <a
+                        class={`${j.id == Jobs.length ? "opacity-0 pointer-events-none" : "opacity-100"} text-heading-md font-display`}
+                        href={`#work_${j.id + 1}`}
+                    >
+                        →
+                    </a>
                 </div>
             ))
         }
     </div>
 </section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+    gsap.registerPlugin(ScrollToPlugin);
+
+    const slides = document.querySelectorAll("#Slider a");
+
+    function scrollSlide(href: string) {
+        gsap.to("#Slider", {
+            duration: 1,
+            scrollTo:{x:href},
+            ease: "power2.inOut",
+        });
+    }
+
+    slides.forEach((element) => {
+        const href = element.getAttribute("href") ?? "";
+
+        if (!href.startsWith("#")) return;
+
+        element.addEventListener("click", (e) => {
+            e.preventDefault();
+            scrollSlide(href);
+        });
+    });
+
+</script>

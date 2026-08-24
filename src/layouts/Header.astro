@@ -3,6 +3,37 @@ import NavBar from "../components/NavBar.astro"
 ---
 <header class="fixed flex justify-between h-[8dvh] w-full px-4  py-2 z-10">
     <div class=" h-full aspect-square rounded-sm bg-primary"/>
-    <h2 class="font-headings text-heading-md flex items-center justify-center text-center grow ">Title Section</h2>
+    <h2 class="font-headings text-heading-md flex items-center justify-center text-center grow ">Title section</h2>
     <NavBar/>
 </header>
+
+<script>
+    
+    import {gsap} from "gsap"
+    import { ScrollTrigger } from "gsap/ScrollTrigger"
+    import { SplitText } from "gsap/SplitText";
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+
+    const title = document.querySelector("header h2")
+
+    let tl = gsap.timeline();
+    let split, animation;
+
+    tl.to("header h2",{
+        scrollTrigger:{
+            trigger: "#Experience",
+            start: "top center",
+            end:"top top",
+            scrub:1
+        },
+    }).to("header h2",{
+        scrollTrigger:{
+           trigger: "#Technologie",
+           start:"top center",
+           end:"top top",
+            scrub:1
+        },
+        color: "blue"
+    })
+
+</script>

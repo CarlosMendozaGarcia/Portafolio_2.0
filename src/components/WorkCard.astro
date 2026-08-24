@@ -2,19 +2,18 @@
 import Timer from "./Timer";
 
 type Props = {
-    id: number;
     company: string;
     position: string;
     initialDate: string;
     endDate?: string;
 };
-const { id, company, position, initialDate, endDate } = Astro.props;
+const {  company, position, initialDate, endDate } = Astro.props;
 
 const {initDay, actualDay, endDay, diff } = Timer(initialDate,endDate) ;
 
 ---
 <!-- utilizar gsap para pasar y background -->
-<div id={`work_${id}`}
+<div 
     class="flex flex-col gap-2 items-start w-1/2 h-1/2 border-8 border-double px-4 py-2 rounded-md "
 >
     <h3
