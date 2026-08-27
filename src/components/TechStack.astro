@@ -1,0 +1,19 @@
+---
+import CalculateMeasure from "./CalculateMeasure";
+type Props = {
+    name: string;
+    size: number;
+};
+const { name, size } = Astro.props;
+
+const { height, width } = CalculateMeasure(size);
+---
+
+<div
+    id="TechStack"
+    class="flex flex-col items-center justify-center font-headings text-body text-background gap-4 bg-primary rounded-lg border-4 border-secondary"
+    style={`grid-column: span ${width} / span ${width} ; grid-row: span ${height} / span ${height}`}
+>
+    <h3 class="font-headings text-heading-sm">{name}</h3>
+    <p class="font-body text-body-lg">{height} , {width}</p>
+</div>
