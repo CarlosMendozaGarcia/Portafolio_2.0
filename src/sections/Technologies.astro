@@ -1,65 +1,69 @@
 ---
-import { array } from "astro:schema";
+import layoutTechStack from "../lib/layoutTechStack";
 import TechStack from "../components/TechStack.astro";
 
 const techStack = [
-    {
-        name: "Next.JS",
-        proficiency: 80,
-    },
-    {
-        name: "Next.JS",
-        proficiency: 20,
-    },
-    {
-        name: "Next.JS",
-        proficiency: 48,
-    },
-    {
-        name: "Next.JS",
-        proficiency: 59,
-    },
-    {
-        name: "Next.JS",
-        proficiency: 32,
-    },
-    {
-        name: "Next.JS",
-        proficiency: 45,
-    },
-    {
-        name: "Next.JS",
-        proficiency: 20,
-    },
-    {
-        name: "Next.JS",
-        proficiency: 15,
-    },
+    { name: "HTML5", proficiency: 70 },
+    { name: "CSS3", proficiency: 70 },
+    { name: "Javascript", proficiency: 60 },
+    { name: "Typescript", proficiency: 60 },
+    { name: "React", proficiency: 70 },
+    { name: "Next.Js", proficiency: 70 },
+    { name: "Astro.Js", proficiency: 40 },
+    { name: "Tailwind CSS", proficiency: 70 },
+    { name: "Node.js", proficiency: 30 },
+    { name: "Express.js", proficiency: 30 },
+    { name: "Python", proficiency: 30 },
+    { name: "Java", proficiency: 30 },
+    { name: "MongoDB", proficiency: 30 },
+    { name: "SQL", proficiency: 30 },
+    { name: "Firebase", proficiency: 20 },
+    { name: "Vercel", proficiency: 40 },
+    { name: "Netlify", proficiency: 40 },
+    { name: "Coolify", proficiency: 50 },
+    { name: "GSAP", proficiency: 20 },
+    { name: "ZuStand", proficiency: 30 },
+    { name: "Next-Intl", proficiency: 10 },
+    { name: "Next-Auth", proficiency: 10 },
+    { name: "Swiper.Js", proficiency: 30 },
+    { name: "Java", proficiency: 30 },
 ];
-let total = 0;
 
-techStack.forEach((t) => {
-    return (total += t.proficiency);
-});
+const layout = layoutTechStack(techStack);
 ---
 
 <section
     id="Technologie"
-    class="flex flex-col justify-end w-full h-full border-2 px-6 pb-6 pt-[8dvh]"
+    class="flex flex-col justify-end w-full h-full border-2 px-6 pb-4 pt-[8dvh]"
 >
     <div
         id="Container"
-        class="grid grid-cols-10 grid-rows-10  gap-2 h-full w-full  p-2"
+        class="relative h-full w-full border-2 border-dashed rounded-xl"
     >
-        {
-            techStack.map((t) => (
-                <TechStack
-                    name={t.name}
-                    size={Math.floor((t.proficiency * 100) / total)}
-                />
-            ))
-        }
-        
+        <div
+            class="absolute h-full w-full grid grid-cols-20 grid-rows-10 grid-flow-dense gap-2 p-2"
+        >
+            {
+                Array.from({ length: 200 }, (v, i) => i).map((e) => (
+                    <div class="w-full h-full bg-secondary/20 col-span-1 row-span-1 rounded-lg border-4 border-secondary/30" />
+                ))
+            }
+        </div>
+        <div
+            class="h-full w-full grid grid-cols-20 grid-rows-10 grid-flow-dense gap-2 p-2"
+        >
+            {
+                layout.map((t) => (
+                    <TechStack
+                        name={t.name}
+                        colStart={t.colStart}
+                        rowStart={t.rowStart}
+                        colSpan={t.colSpan}
+                        rowSpan={t.rowSpan}
+                    />
+                ))
+            }
+        </div>
     </div>
     <div class="shrink-0 flex justify-center gap-2">
         <button type="button" class="font-headings button-secondary"
@@ -69,7 +73,7 @@ techStack.forEach((t) => {
             >Backend</button
         >
         <button type="button" class="font-headings button-secondary"
-            >Base de datos</button
+            >Infraestructura</button
         >
         <button type="button" class="font-headings button-secondary"
             >Librerias y Plugins</button
@@ -78,18 +82,30 @@ techStack.forEach((t) => {
 </section>
 <script>
     import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
     import { Draggable } from "gsap/Draggable";
     import { InertiaPlugin } from "gsap/InertiaPlugin";
-    gsap.registerPlugin(Draggable, InertiaPlugin);
+    gsap.registerPlugin(Draggable,ScrollTrigger, InertiaPlugin);
 
-    const techs = document.querySelectorAll("#TechStack");
+    const techs = document.querySelectorAll(".tech-stack");
     const canva = document.querySelector("#Container");
+
+    gsap.from(techs, {
+        opacity: 0,
+        scale: 0,
+        stagger: {
+            from: "random",
+            each: 0.05,
+        },
+        scrollTrigger:{
+            trigger:canva,
+        }
+    });
 
     techs.forEach((t) => {
         Draggable.create(t, {
             bounds: canva,
-            inertia: true
+            inertia: true,
         });
-        ondrag
     });
 </script>

@@ -11,7 +11,6 @@ export default function Timer(dateStart:string, dateEnd?:string ){
     const initialDate = new Date(dateStart);
     const msInitialDate = initialDate.getTime();
 
-    console.log(dateEnd)
     if(!dateEnd){
         const actualDate = Date.now()
         let diff = Math.floor((actualDate - msInitialDate) / day)
