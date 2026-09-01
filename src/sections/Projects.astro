@@ -1,17 +1,76 @@
 ---
----
-<section id="Projects" class="w-full h-full border-2 px-4 pt-[9dvh] pb-4 ">
-    <div class="absolute flex left-0  w-full h-50 border-2 overflow-x-scroll">
-        <div class="shrink-0 bg-yellow-500 w-80"/>
-        <div class="shrink-0 bg-red-500 w-80"/>
-        <div class="shrink-0 bg-blue-500 w-80"/>
-        <div class="shrink-0 bg-green-500 w-80"/>
-        <div class="shrink-0 bg-purple-500 w-80"/>
-        <div class="shrink-0 bg-cyan-500 w-80"/>
-        <div class="shrink-0 bg-slate-500 w-80"/>
-        <div class="shrink-0 bg-amber-500 w-80"/>
-    </div>
-    <div>
 
+---
+
+<section
+    id="Projects"
+    class="flex flex-col w-full h-full border-2 px-4 pt-[9dvh] pb-4"
+>
+    <div class="w-full h-50 overflow-hidden">
+        <div id="carousel-track" class="flex h-full">
+            <div class="shrink-0 bg-yellow-500 w-80">1</div>
+            <div class="shrink-0 bg-red-500 w-80">2</div>
+            <div class="shrink-0 bg-blue-500 w-80">3</div>
+            <div class="shrink-0 bg-green-500 w-80">4</div>
+            <div class="shrink-0 bg-purple-500 w-80">5</div>
+            <div class="shrink-0 bg-cyan-500 w-80">6</div>
+            <div class="shrink-0 bg-slate-500 w-80">7</div>
+            <div class="shrink-0 bg-amber-500 w-80">8</div>
+            <div class="shrink-0 bg-yellow-500 w-80">9</div>
+            <div class="shrink-0 bg-red-500 w-80">2</div>
+            <div class="shrink-0 bg-blue-500 w-80">3</div>
+            <div class="shrink-0 bg-green-500 w-80">4</div>
+            <div class="shrink-0 bg-purple-500 w-80">5</div>
+            <div class="shrink-0 bg-cyan-500 w-80">6</div>
+            <div class="shrink-0 bg-slate-500 w-80">7</div>
+            <div class="shrink-0 bg-amber-500 w-80">8</div>
+        </div>
+    </div>
+    <div class="grow w-full">
+        <div class="h-52.5 border-2 overflow-y-hidden">
+            <div
+                id="carousel-vertical"
+                class=" mask-b-from-10%  text-secondary flex flex-col items-end text-body-lg font-headings uppercase right-0 bottom-full "
+            >
+                <p>[Creativo]</p>
+                <p>[Resilente]</p>
+                <!-- scale85 opacity-20 -->
+                <p>[Adaptabilidad]</p><!-- scale 90 opacity80-->
+                <p>[Comunicación efectiva]</p>
+                <!-- scale 110 -->
+                <p>[Ingenioso]</p><!-- scale 90 opacity80-->
+                <p>[Autocritico]</p><!-- scale 90 opacity80-->
+                <p>[Responsable]</p>
+                <p>[Creativo]</p>
+                <p>[Resilente]</p>
+                <!-- scale85 opacity-20 -->
+                <p>[Adaptabilidad]</p><!-- scale 90 opacity80-->
+                <p>[Comunicación efectiva]</p>
+                <!-- scale 110 -->
+                <p>[Ingenioso]</p><!-- scale 90 opacity80-->
+                <p>[Autocritico]</p><!-- scale 90 opacity80-->
+                <p>[Responsable]</p>
+            </div>
+        </div>
     </div>
 </section>
+<script>
+    import gsap from "gsap";
+    import ScrollTrigger from "gsap/ScrollTrigger";
+    import ScrollSmoother from "gsap/ScrollSmoother";
+
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+    gsap.to("#carousel-track", {
+        xPercent: -182.65, // si duplicaste el contenido 1 vez (2x el original)
+        ease: "none",
+        duration: 20, // controla la velocidad
+        repeat: -1,
+    });
+    gsap.to("#carousel-vertical", {
+        yPercent: -50, // si duplicaste el contenido 1 vez (2x el original)
+        ease: "none",
+        duration: 10, // controla la velocidad
+        repeat: -1,
+    });
+</script>
