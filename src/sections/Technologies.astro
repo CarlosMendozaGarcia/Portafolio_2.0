@@ -1,111 +1,70 @@
 ---
-import layoutTechStack from "../lib/layoutTechStack";
-import TechStack from "../components/TechStack.astro";
-
-const techStack = [
-    { name: "HTML5", proficiency: 70 },
-    { name: "CSS3", proficiency: 70 },
-    { name: "Javascript", proficiency: 60 },
-    { name: "Typescript", proficiency: 60 },
-    { name: "React", proficiency: 70 },
-    { name: "Next.Js", proficiency: 70 },
-    { name: "Astro.Js", proficiency: 40 },
-    { name: "Tailwind CSS", proficiency: 70 },
-    { name: "Node.js", proficiency: 30 },
-    { name: "Express.js", proficiency: 30 },
-    { name: "Python", proficiency: 30 },
-    { name: "Java", proficiency: 30 },
-    { name: "MongoDB", proficiency: 30 },
-    { name: "SQL", proficiency: 30 },
-    { name: "Firebase", proficiency: 20 },
-    { name: "Vercel", proficiency: 40 },
-    { name: "Netlify", proficiency: 40 },
-    { name: "Coolify", proficiency: 50 },
-    { name: "GSAP", proficiency: 20 },
-    { name: "ZuStand", proficiency: 30 },
-    { name: "Next-Intl", proficiency: 10 },
-    { name: "Next-Auth", proficiency: 10 },
-    { name: "Swiper.Js", proficiency: 30 },
-    { name: "Java", proficiency: 30 },
-];
-
-const layout = layoutTechStack(techStack);
+import TechBoard from "../components/TechBoard";
 ---
 
-<section
-    id="Technologie"
-    class="flex flex-col justify-end w-full h-full border-2 px-6 pb-4 pt-[8dvh]"
->
-    <div
-        id="Container"
-        class="relative h-full w-full border-2 border-dashed rounded-xl"
-    >
-        <div
-            class="absolute h-full w-full grid grid-cols-20 grid-rows-10 grid-flow-dense gap-2 p-2"
-        >
-            {
-                Array.from({ length: 200 }, (v, i) => i).map((e) => (
-                    <div class="w-full h-full bg-secondary/20 col-span-1 row-span-1 rounded-lg border-4 border-secondary/30" />
-                ))
-            }
-        </div>
-        <div
-            class="h-full w-full grid grid-cols-20 grid-rows-10 grid-flow-dense gap-2 p-2"
-        >
-            {
-                layout.map((t) => (
-                    <TechStack
-                        name={t.name}
-                        colStart={t.colStart}
-                        rowStart={t.rowStart}
-                        colSpan={t.colSpan}
-                        rowSpan={t.rowSpan}
-                    />
-                ))
-            }
-        </div>
-    </div>
-    <div class="shrink-0 flex justify-center gap-2">
-        <button type="button" class="font-headings button-secondary"
-            >FrontEnd</button
-        >
-        <button type="button" class="font-headings button-secondary"
-            >Backend</button
-        >
-        <button type="button" class="font-headings button-secondary"
-            >Infraestructura</button
-        >
-        <button type="button" class="font-headings button-secondary"
-            >Librerias y Plugins</button
-        >
-    </div>
+<section id="Technologie" class="w-full h-full">
+    <TechBoard client:idle />
 </section>
+
 <script>
-    import { gsap } from "gsap";
+    /* import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
     import { Draggable } from "gsap/Draggable";
     import { InertiaPlugin } from "gsap/InertiaPlugin";
-    gsap.registerPlugin(Draggable,ScrollTrigger, InertiaPlugin);
+    gsap.registerPlugin(Draggable, ScrollTrigger, InertiaPlugin);
 
-    const techs = document.querySelectorAll(".tech-stack");
-    const canva = document.querySelector("#Container");
+    const canva = document.querySelector<HTMLElement>("#Container")!;
+    const buttons = document.querySelectorAll<HTMLButtonElement>(
+        "button[data-filter]",
+    );
 
-    gsap.from(techs, {
-        opacity: 0,
-        scale: 0,
-        stagger: {
-            from: "random",
-            each: 0.05,
-        },
-        scrollTrigger:{
-            trigger:canva,
-        }
-    });
+    let draggables: Draggable[] = [];
 
-    techs.forEach((t) => {
-        Draggable.create(t, {
+    function initDraggables(elements: HTMLElement[]) {
+        draggables.forEach((d) => d.kill()); // limpiar instancias previas, si no se acumulan
+        draggables = Draggable.create(elements, {
             bounds: canva,
             inertia: true,
+            onDrag(this: Draggable) {
+                gsap.to(this.target, {
+                    boxShadow: "0px 0px 16px 4px rgba(0,0,0,0.5)",
+                });
+            },
+            onRelease(this: Draggable) {
+                gsap.to(this.target, {
+                    duration: 1,
+                    x: 0,
+                    y: 0,
+                    boxShadow: "none",
+                    ease: "elastic.out(.30)",
+                });
+            },
         });
+    }
+
+    function applyFilter(type: string) {
+        const allTechs = document.querySelectorAll<HTMLElement>(".tech-stack");
+        console.log(allTechs);
+        const visible: HTMLElement[] = [];
+
+        allTechs.forEach((el) => {
+            const match = type === "all" || el.dataset.type === type;
+            el.style.display = match ? "" : "none";
+            if (match) visible.push(el);
+        });
+
+        gsap.fromTo(
+            visible,
+            { opacity: 0, scale: 0 },
+            { opacity: 1, scale: 1, stagger: { from: "random", each: 0.05 } },
+        );
+
+        initDraggables(visible);
+    }
+
+    buttons.forEach((btn) => {
+        btn.addEventListener("click", () => applyFilter(btn.dataset.filter!));
     });
+
+    applyFilter("all"); // estado inicial */
 </script>

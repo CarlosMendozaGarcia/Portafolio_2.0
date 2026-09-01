@@ -3,11 +3,14 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import react from "@astrojs/react";
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
+
   fonts: [{
     provider: fontProviders.fontsource(),
     name: "Space Grotesk",
@@ -17,5 +20,7 @@ export default defineConfig({
     provider: fontProviders.fontsource(),
     name: "Inter",
     cssVariable: "--font-inter"
-  }]
+  }],
+
+  integrations: [react()]
 });

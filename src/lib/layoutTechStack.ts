@@ -1,6 +1,7 @@
 export type TechInput = {
     name: string;
     proficiency: number;
+    type: string;
 };
 
 export type TechLayout = TechInput & {
