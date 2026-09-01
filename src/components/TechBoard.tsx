@@ -52,6 +52,9 @@ export default function TechBoard() {
             stagger: {
                 each: 0.05,
                 from: "random"
+            },
+            scrollTrigger:{
+                trigger:"#Technologie"
             }
         })
         const cards = document.querySelectorAll(".tech-stack");
@@ -62,7 +65,7 @@ export default function TechBoard() {
                 inertia: true,
                 onDrag: () => {
                     gsap.to(c, {
-                        boxShadow: "0px 0px 16px 4px rgba(0, 0, 0, 0.5)",
+                        boxShadow: "0px 0px 16px 4px var(--primary)",
                     });
                 },
                 onRelease: () => {
@@ -81,7 +84,7 @@ export default function TechBoard() {
     return <div className="flex flex-col w-full h-full px-4 pb-4 pt-[9dvh] gap-2 ">
         <div
             id="Container"
-            className="relative h-full w-full border-2 border-dashed rounded-xl"
+            className="relative h-full w-full border-3 border-dashed border-primary rounded-xl"
         >
             <div
                 className="absolute h-full w-full grid grid-cols-20 grid-rows-10 grid-flow-dense gap-2 p-2 -z-10  "
@@ -103,15 +106,15 @@ export default function TechBoard() {
             </div>
         </div>
         <div className="shrink-0 flex justify-center gap-2">
-            <button type="button" onClick={() => setState("all")} className="font-headings button-secondary">
+            <button type="button" onClick={() => setState("all")} className={`${state == "all" ? "button-secondary-active": "button-secondary"} font-headings transition-colors duration-150`}>
                 Todos</button>
-            <button type="button" onClick={() => setState("FrontEnd")} className="font-headings button-secondary">
+            <button type="button" onClick={() => setState("FrontEnd")} className={`${state == "FrontEnd" ? "button-secondary-active": "button-secondary"} font-headings transition-colors duration-150`}>
                 FrontEnd</button>
-            <button type="button" onClick={() => setState("BackEnd")} className="font-headings button-secondary">
+            <button type="button" onClick={() => setState("BackEnd")} className={`${state == "BackEnd" ? "button-secondary-active": "button-secondary"} font-headings transition-colors duration-150`}>
                 BackEnd</button>
-            <button type="button" onClick={() => setState("Infrastructure")} className="font-headings button-secondary">
+            <button type="button" onClick={() => setState("Infrastructure")} className={`${state == "Infrastructure" ? "button-secondary-active": "button-secondary"} font-headings transition-colors duration-150`}>
                 Infraestructura</button>
-            <button type="button" onClick={() => setState("Others")} className="font-headings button-secondary"
+            <button type="button" onClick={() => setState("Others")} className={`${state == "Others" ? "button-secondary-active": "button-secondary"} font-headings transition-colors duration-150`}
             >Librerias y Plugins</button>
         </div>
     </div>

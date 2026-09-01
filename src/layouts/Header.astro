@@ -2,14 +2,15 @@
 import NavBar from "../components/NavBar.astro";
 ---
 
-<header class="fixed flex justify-between h-[8dvh] w-full px-4 py-2 z-10  ">
+<header class="fixed flex justify-between h-[8dvh] w-full px-4 py-2 z-10">
     <div class="h-full aspect-square rounded-sm bg-primary"></div>
-    <div class="relative font-headings text-heading-md text-center grow">
+    <div
+        class="relative font-semibold font-headings text-heading-md text-primary text-center grow"
+    >
         <h2 id="title_0" class="absolute inset-0">Experiencia</h2>
         <h2 id="title_1" class="absolute inset-0">Technologias</h2>
-        <h2 id="title_2" class="absolute inset-0 opacity-0">Proyectos</h2>
+        <h2 id="title_2" class="absolute inset-0">Proyectos</h2>
     </div>
-
     <NavBar />
 </header>
 
@@ -19,7 +20,7 @@ import NavBar from "../components/NavBar.astro";
     import { SplitText } from "gsap/SplitText";
     gsap.registerPlugin(ScrollTrigger, SplitText);
 
-    const sections = ["#Experience", "#Technologie"];
+    const sections = ["#Experience", "#Technologie", "#Projects"];
 
     const titles = document.querySelectorAll("header h2");
 

@@ -1,13 +1,33 @@
 @import "tailwindcss";
 
 
-:root {
+/* :root {
     --background: #FFFEFB;
     --foreground: #171310;
     --primary: #519872;
     --secondary: #3b5249;
+} */
 
+:root {
+    --background: #F4F4F0;
+    --foreground: #116191C;
+    --primary: #123B5D;
+    --secondary: #2D6F95;
 }
+
+/* :root {
+    --background: #F1F1EC;
+    --foreground: #111111;
+    --primary: #00A86B;
+    --secondary: #00D084;
+} */
+
+/* :root {
+    --background: #F2F1EC;
+    --foreground: #111111;
+    --primary: #123C4A;
+    --secondary: #E86A33;
+} */
 
 @font-face {
     font-family: 'ServerMono';
@@ -54,6 +74,27 @@
 }
 
 @utility button-tertiary {
+    padding: 2px 4px;
+    border-radius:4px; 
+    color: var(--primary);
+}
+
+@utility button-primary-active {
+    padding: 2px 4px;
+    border-radius:4px;
+    background: var(---secondary);
+    color: var(--background);
+
+}
+
+@utility button-secondary-active {
+    padding: 2px 4px;
+    border-radius:4px;
+    background:  var(--primary);
+    color: var(--background);
+}
+
+@utility button-tertiary-active {
     padding: 2px 4px;
     border-radius:4px; 
     color: var(--primary);
