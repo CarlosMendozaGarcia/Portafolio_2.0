@@ -1,0 +1,121 @@
+<div
+    id="container-carousel"
+    class="absolute h-58 py-5 right-0 bottom-full overflow-y-hidden mask-y-from-80% mask-y-to-95% text-secondary"
+>
+    <div
+        id="carousel-adjective"
+        class="text-right text-secondary flex flex-col items-end font-headings uppercase right-0 bottom-full"
+    >
+        <div class="Adjectives w-full">
+            <p>[Creativo]</p>
+        </div>
+        <div class="Adjectives w-full">
+            <p>[Resiliente]</p>
+        </div>
+        <div class="Adjectives w-full">
+            <p>[Adaptable]</p>
+        </div>
+        <div class="Adjectives w-full">
+            <p>[Comunicación efectiva]</p>
+        </div>
+        <div class="Adjectives w-full">
+            <p>[Ingenioso]</p>
+        </div>
+        <div class="Adjectives w-full">
+            <p>[Autocritico]</p>
+        </div>
+        <div class="Adjectives w-full">
+            <p>[Responsable]</p>
+        </div>
+        <div class="Adjectives w-full">
+            <p>[Creativo]</p>
+        </div>
+        <div class="Adjectives w-full">
+            <p>[Resiliente]</p>
+        </div>
+        <div class="Adjectives w-full">
+            <p>[Adaptable]</p>
+        </div>
+        <div class="Adjectives w-full">
+            <p>[Comunicación efectiva]</p>
+        </div>
+        <div class="Adjectives w-full">
+            <p>[Ingenioso]</p>
+        </div>
+        <div class="Adjectives w-full">
+            <p>[Autocritico]</p>
+        </div>
+        <div class="Adjectives w-full">
+            <p>[Responsable]</p>
+        </div>
+    </div>
+</div>
+<script>
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+
+    const adjectives = document.querySelectorAll<HTMLElement>(".Adjectives");
+    const container = document.querySelector<HTMLElement>(
+        "#container-carousel",
+    )!;
+
+    const CENTER_SIZE = 2.5;
+    const NEAR_SIZE = 1.75;
+    const FAR_SIZE = 1.5;
+    const ITEM_HEIGHT = 38;
+
+    const setters = new Map(
+        Array.from(adjectives).map((el) => [
+            el,
+            gsap.quickSetter(el, "fontSize", "rem"),
+        ]),
+    );
+
+    function getFontSizeForDistance(distance: number): number {
+        const units = distance / ITEM_HEIGHT;
+        if (units <= 1)
+            return gsap.utils.interpolate(CENTER_SIZE, NEAR_SIZE, units);
+        if (units <= 2)
+            return gsap.utils.interpolate(NEAR_SIZE, FAR_SIZE, units - 1);
+        return FAR_SIZE;
+    }
+
+    // esta es la función que corre en el ticker, independiente del tween de scroll
+    function updatePositions() {
+        const containerRect = container.getBoundingClientRect();
+        const centerY = containerRect.top + containerRect.height / 2;
+
+        adjectives.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            const elCenterY = rect.top + rect.height / 2;
+            const distance = Math.abs(elCenterY - centerY);
+            setters.get(el)!(getFontSizeForDistance(distance));
+        });
+    }
+
+    // el scroll infinito, SIN onUpdate ahora
+    const scrollTween = gsap.to("#carousel-adjective", {
+        yPercent: -45,
+        ease: "none",
+        duration: 8,
+        repeat: -1,
+        paused: true, // arranca pausado; lo controla el ScrollTrigger
+    });
+
+
+    ScrollTrigger.create({
+        trigger: container,
+        start: "top bottom",
+        end: "bottom top",
+        onToggle: (self) => {
+            if (self.isActive) {
+                scrollTween.play();
+                gsap.ticker.add(updatePositions);
+            } else {
+                scrollTween.pause();
+                gsap.ticker.remove(updatePositions);
+            }
+        },
+    });
+</script>

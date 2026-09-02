@@ -44,6 +44,7 @@
     --color-secondary:var(--secondary);
 
     --text-display: 6rem;
+    --text-display-sm: 5rem;
     --text-heading-lg: 3rem;
     --text-heading-md: 1.75rem;
     --text-heading-sm: 1.5rem;
