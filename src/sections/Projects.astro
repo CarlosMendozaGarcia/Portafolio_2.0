@@ -1,75 +1,156 @@
 ---
-
+import { Projects } from "../data/projects.data";
 ---
 
 <section
     id="Projects"
-    class="flex flex-col items-center justify-center w-full h-full border-2 px-4 pt-[9dvh] pb-4"
+    class="relative flex flex-col items-center justify-center w-full h-full gap-2 px-4 pt-[9dvh] pb-4 overflow-hidden"
 >
-    <div class="w-full h-50 overflow-hidden border-2">
-        <div id="carousel-track" class="flex w-full h-full">
-            <div id="Slide_1" class="projects shrink-0 bg-yellow-500 w-1/4">
-                1
-            </div>
-            <div id="Slide_2" class="projects shrink-0 bg-red-500 w-1/4">2</div>
-            <div id="Slide_3" class="projects shrink-0 bg-blue-500 w-1/4">
-                3
-            </div>
-            <div id="Slide_4" class="projects shrink-0 bg-green-500 w-1/4">
-                4
-            </div>
-            <div id="Slide_5" class="projects shrink-0 bg-purple-500 w-1/4">
-                5
-            </div>
-            <div id="Slide_6" class="projects shrink-0 bg-cyan-500 w-1/4">
-                6
-            </div>
-            <div id="Slide_7" class="projects shrink-0 bg-slate-500 w-1/4">
-                7
-            </div>
-            <div id="Slide_8" class="projects shrink-0 bg-amber-500 w-1/4">
-                8
-            </div>
-            <div id="Slide_9" class="projects shrink-0 bg-yellow-500 w-1/4">
-                9
-            </div>
-            <div class="projects shrink-0 bg-red-500 w-1/4">2</div>
-            <div class="projects shrink-0 bg-blue-500 w-1/4">3</div>
-            <div class="projects shrink-0 bg-green-500 w-1/4">4</div>
-            <div class="projects shrink-0 bg-purple-500 w-1/4">5</div>
-            <div class="projects shrink-0 bg-cyan-500 w-1/4">6</div>
-            <div class="projects shrink-0 bg-slate-500 w-1/4">7</div>
-            <div class="projects shrink-0 bg-amber-500 w-1/4">8</div>
+    <div
+        class="container-carousel absolute flex w-full h-50 overflow-hidden z-10 bg-background"
+    >
+        <div class="flex w-full h-full">
+            {
+                Projects.map((p, i) => (
+                    <div
+                        class="projects shrink-0 bg-secondary w-1/3"
+                        style={{
+                            width: `calc(${1 / (Projects.length - 1)}*100%)`,
+                        }}
+                    >
+                        {i}
+                    </div>
+                ))
+            }
         </div>
     </div>
+    <div id="container-project" class="absolute flex grow w-full">
+        <div class="flex flex-col w-1/2">
+            <h2
+                id="title"
+                class="font-headings text-heading-md text-primary font-bold"
+            >
+                Title
+            </h2>
+            <div id="tags">span</div>
+            <p id="description" class="text-body-sm font-body">Description</p>
+            <div class="flex font-display items-center justify-around">
+                <a id="Website" class="button-primary w-1/4 h-10"
+                    >Visitar sitio</a
+                >
+                <a id="Github" class="button-secondary w-1/4 h-10">Github</a>
+            </div>
+        </div>
+        <div id="Image" class="w-1/2 h-full border-2"></div>
+
+        <button
+            type="button"
+            id="hideContent"
+            class="right-0 absolute button-primary active:brightness-125"
+            >quitar</button
+        >
+    </div>
 </section>
+
 <script>
     import gsap from "gsap";
-    import ScrollToPlugin from "gsap/ScrollToPlugin";
-    import ScrollTrigger from "gsap/ScrollTrigger";
+    import TextPlugin from "gsap/TextPlugin";
+    import Flip from "gsap/Flip";
     import ScrollSmoother from "gsap/ScrollSmoother";
+    import ScrollTrigger from "gsap/ScrollTrigger";
 
-    gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, ScrollSmoother);
+    import horizontalLoop from "../lib/horizontalLoop";
+    import { Projects } from "../data/projects.data";
+    gsap.registerPlugin(TextPlugin, Flip, ScrollSmoother, ScrollTrigger);
 
-    const slides = document.querySelectorAll(".projects");
+    const projects: Array<HTMLAnchorElement> = gsap.utils.toArray(".projects");
+    const button = document.querySelector("#hideContent");
+    const loop = horizontalLoop(projects, { paused: false });
+    let hideContent = true;
 
-    const scrolling = gsap.to("#carousel-track", {
-        xPercent: -200, // si duplicaste el contenido 1 vez (2x el original)
-        ease: "none",
-        duration: 20, // controla la velocidad
-        repeat: -1,
-    });
+    function translateCarousel() {
+        let translate = gsap.timeline({
+            ease: "power1.inOut",
+        });
+        translate
+            .to(".container-carousel", {
+                top: "9dvh",
+                position: "absolute",
+                duration: 1,
+            })
+            .to(
+                ".container-carousel",
+                {
+                    position: "static",
+                },
+                ">",
+            );
+        return translate;
+    }
 
-    slides.forEach((s) => {
-        s.addEventListener("click", () => {
+    function hideProject(i?: number) {
+        let hideAnimation = gsap.timeline({
+            ease: "power1.inOut",
+        });
+
+        hideAnimation.set("#title", { text: Projects[i ?? 0].title });
+        hideAnimation.set("#description", {
+            text: Projects[i ?? 0].description,
+        });
+        if (Projects[i ?? 0].urlWebsite)
+            hideAnimation.set("#Website", {
+                href: Projects[i ?? 0].urlWebsite,
+            });
+        if (Projects[i ?? 0].urlGithub)
+            hideAnimation.set("#Github", { href: Projects[i ?? 0].urlGithub });
+        hideAnimation
+            .from("#container-project", {
+                yPercent: 100,
+            })
+            .from(
+                "#container-project",
+                {
+                    opacity: 0,
+                    duration: 1,
+                },
+                "<",
+            )
+            .to(
+                "#container-project",
+                {
+                    position: "static",
+                },
+                "<",
+            );
+        return hideAnimation;
+    }
+
+    function entranceAnimation(i?: number) {
+        let animation = gsap.timeline();
+
+        animation.add(translateCarousel());
+        animation.add(hideProject(i), "-=0.5");
+
+        return animation;
+    }
+
+    let tl = entranceAnimation().paused(true);
+
+    projects.forEach((p, i) => {
+        p.addEventListener("click", () => {
+            if (hideContent) {
+                tl.play();
+                hideContent = !hideContent;
+            } else {
+                hideProject(i);
+            }
+            loop.toIndex(i, { duration: 1, ease: "power1.inOut" });
         });
     });
+
+    button?.addEventListener("click", () => {
+        hideContent = !hideContent;
+        tl.reverse();
+        loop.play();
+    });
 </script>
-<!-- 
-                <p>[Creativo]</p>
-                <p>[Resilente]</p> scale85 opacity-20
-                <p>[Adaptable]</p> scale 90 opacity80
-                <p>[Comunicación efectiva]</p>  scale 110 
-                <p>[Ingenioso]</p> scale 90 opacity80
-                <p>[Autocritico]</p>  scale 90 opacity80
-                <p>[Responsable]</p> -->
