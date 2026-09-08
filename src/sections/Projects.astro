@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { Projects } from "../data/projects.data";
 ---
 
@@ -11,66 +12,102 @@ import { Projects } from "../data/projects.data";
     >
         <div class="flex w-full h-full">
             {
-                Projects.map((p, i) => (
-                    <div
-                        data-project={i}
-                        class="slides shrink-0  w-1/3 text-background"
-                        style={{
-                            width: `calc(${1 / (Projects.length - 1)}*100%)`,
-                        }}
-                    >
-                        {" "}
-                        {p.title}
-                    </div>
-                ))
+                Projects.map((p, i) => {
+                    const coverImage = p.images[0];
+                    return (
+                        <div
+                            tabindex={i}
+                            data-project={i}
+                            class="group flex items-center justify-center slides shrink-0  w-1/3 text-background"
+                            style={{
+                                width: `calc(${1 / (Projects.length - 1)}*100%)`,
+                            }}
+                        >
+                            <Image
+                                src={coverImage}
+                                alt="Casamigos"
+                                class="object-cover w-full h-full"
+                            />
+                            <span class="absolute flex items-center justify-center text-heading-sm font-headings font-bold bg-primary w-full h-full group-hover:bg-primary/50 group-hover:backdrop-blur-xs group-focus-within:bg-primary/50 group-focus-within:backdrop-blur-xs">
+                                {p.title}
+                            </span>
+                        </div>
+                    );
+                })
             }
         </div>
     </div>
     <div id="container" class="relative flex flex-col grow w-full">
         {
-            Projects.map((p, i) => (
-                <div
-                    id={"project_" + i.toString()}
-                    class="projects absolute flex shrink-0 h-full w-full "
-                >
-                    <div class="flex flex-col justify-evenly w-1/2 p-2">
-                        <div class="flex flex-col gap-2">
-                            <h2 class="font-headings text-heading-md text-primary font-bold">
-                                {p.title}
-                            </h2>
-                            <div class="flex gap-2 ">{p.tags.map((t) => (
-                                <div class="rounded-full py-1 px-2 text-body-sm font-display bg-secondary text-background ">{t}</div>
-                            ))}</div>
-                        </div>
-                        <p class="text-body-lg font-body text-pretty">
-                            {p.description}
-                        </p>
-                        {(p.urlGithub || p.urlWebsite) && (
-                            <div class="flex font-display items-center justify-between ">
-                                {p.urlGithub && (
-                                    <a  href={p.urlWebsite} class="button-primary w-1/4 h-10">
-                                        Visitar sitio
-                                    </a>
-                                )}
-                                {p.urlWebsite && (
-                                    <a  href={p.urlGithub} class="button-secondary w-1/4 h-10">
-                                        Github
-                                    </a>
-                                )}
-                            </div>
-                        )}
-                    </div>
-                    <div id="Image" class="w-1/2 h-full border-2" />
-
-                    <button
-                        type="button"
-                        data-button={i}
-                        class="hide right-0 absolute button-primary active:brightness-125"
+            Projects.map((p, i) => {
+                const image = p.images[1] ?? p.images[0];
+                return (
+                    <div
+                        id={"project_" + i.toString()}
+                        class="projects absolute flex shrink-0 h-full w-full "
                     >
-                        quitar
-                    </button>
-                </div>
-            ))
+                        <div class="flex flex-col justify-evenly w-1/2 p-2">
+                            <div class="flex flex-col gap-2">
+                                <h2 class="font-headings text-heading-md text-primary font-bold">
+                                    {p.title}
+                                </h2>
+                                <div class="flex gap-2 ">
+                                    {p.tags.map((t) => (
+                                        <div class="rounded-full py-1 px-2 text-body-sm font-display bg-secondary text-background ">
+                                            {t}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <p class="text-body-lg font-body text-pretty">
+                                {p.description}
+                            </p>
+                            {(p.urlGithub || p.urlWebsite) && (
+                                <div class="flex font-display items-center justify-between ">
+                                    {p.urlGithub && (
+                                        <a
+                                            href={p.urlWebsite}
+                                            class="button-primary w-1/4 h-10"
+                                        >
+                                            Visitar sitio
+                                        </a>
+                                    )}
+                                    {p.urlWebsite && (
+                                        <a
+                                            href={p.urlGithub}
+                                            class="button-secondary w-1/4 h-10"
+                                        >
+                                            Github
+                                        </a>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                        <div
+                            id="Image"
+                            class="flex relative w-1/2 h-full rounded-xl overflow-hidden"
+                        >
+                            <Image
+                                src={image}
+                                alt="Casamigos"
+                                class="object-cover blur-md "
+                            />
+                            <Image
+                                src={image}
+                                alt="Casamigos"
+                                class="absolute object-scale-down w-full h-full bg-secondary/50"
+                            />
+                        </div>
+                        <button
+                            type="button"
+                            data-button={i}
+                            class="hide right-0 absolute button-primary active:brightness-125"
+                        >
+                            quitar
+                        </button>
+                    </div>
+                );
+            })
         }
     </div>
 </section>
@@ -85,9 +122,8 @@ import { Projects } from "../data/projects.data";
     gsap.registerPlugin(Flip, ScrollSmoother, ScrollTrigger);
 
     const slides: Array<HTMLAnchorElement> = gsap.utils.toArray(".slides");
-    /* const carousel = document.querySelector(".carousel"); */
     const buttons: Array<HTMLButtonElement> = gsap.utils.toArray(".hide");
-    const loop = horizontalLoop(slides, { paused: false });
+    const loop = horizontalLoop(slides, { paused: false, repeat: -1 });
 
     function Carousel(reveal: boolean) {
         let state = Flip.getState(".carousel");
@@ -146,6 +182,7 @@ import { Projects } from "../data/projects.data";
     }
 
     openProjects();
+    loop.p;
     slides.forEach((p) => {
         const id = p.dataset.project;
         p.addEventListener("click", () => {
@@ -160,7 +197,7 @@ import { Projects } from "../data/projects.data";
             const id = b.dataset.button ?? "";
             closeProjects(id);
             Carousel(false);
-            loop.play()
+            loop.play();
         });
     });
 </script>
