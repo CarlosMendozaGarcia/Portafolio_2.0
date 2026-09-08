@@ -19,7 +19,7 @@ export const Projects: Project[] = [
     {
         title: "Connect Latam VT",
         state: "Completado",
-        tags: ["Website", "Freelance","Next JS", ],
+        tags: ["Website", "Freelance","Next JS","Next-Intl" ],
         description: "Sitio web dedicado a la publicación, divulgacion de blogs, noticias y proyectos relacionados a la K-Pop Band Enhypen. Implementa diseños responsive permitiendo el acceso desde cualuier dispositivo, junto a un boton para cambiar de idiomas entre el español y una infraestructura de SEO completa (metadata, robots.txt, sitemap, Google Search Console). Fue desplegado en vercel y desarrollado en Next.Js, se utilizo Next-Intl para proporcionar internacionalización",
         images: [ConnectLatam, ConnectLatam_1],
         urlWebsite: "https://connectlatamvt.vercel.app/",
@@ -28,7 +28,7 @@ export const Projects: Project[] = [
     {
         title: "Casamigos",
         state: "Completado",
-        tags: ["Landing page","Freelance", "Astro Js", ],
+        tags: ["Landing page","Freelance", "Astro Js","GSAP"],
         description: "Landing page para la promoción de un proyecto inmobiliario ubicado en las islas turcas y caicos, contiene información sobre el proyecto, el equipo, amenidades y especificaciones.Utiliza animación basica y animaciones conectadas con el scroll (ScrollTrigger). Fue desplegado en Netlify y desarrollado con Astro.Js y para las aniamciones se utilizo GSAP",
         images: [Casamigos, Casamigos_1],
         urlWebsite: "https://casamigostci.com/",

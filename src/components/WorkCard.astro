@@ -6,37 +6,46 @@ type Props = {
     position: string;
     initialDate: string;
     endDate?: string;
+    skills: string[];
 };
-const {  company, position, initialDate, endDate } = Astro.props;
 
-const {initDay, actualDay, endDay, diff } = Timer(initialDate,endDate) ;
+const { company, position, initialDate, endDate, skills } = Astro.props;
 
+const { initDay, actualDay, endDay, diff } = Timer(initialDate, endDate);
 ---
+
 <!-- utilizar gsap para pasar y background -->
-<div 
-    class="flex flex-col gap-2 items-start w-1/2 h-1/2 border-8 border-double border-secondary px-4 py-2 rounded-md "
+<div
+    class="relative flex flex-col gap-2 items-start justify-center w-2/3   h-2/3  border-8 border-double border-secondary px-4 py-2 rounded-md bg-background"
 >
-    <h3
-        class="leading-none font-headings text-heading-lg text-primary font-bold"
-    >
-        {company}
-    </h3>
-    <h4 class="font-headings text-heading-md text-secondary  font-semibold">
+    <div class="flex items-center justify-between w-full ">
+        <h3
+            class="leading-none font-headings text-heading-lg text-primary font-bold"
+        >
+            {company}
+        </h3>
+        {
+            !endDate && (
+                <div class=" size-10 bg-secondary rounded-full animate-pulse" />
+            )
+        }
+    </div>
+    <h4 class="font-headings text-heading-md text-secondary font-semibold">
         {position}
     </h4>
     <div class="w-full flex justify-between font-display text-body">
         <div class="flex gap-2">
-            <p>{initDay}</p>
+            <p >{initDay}</p>
             -
-            <p>{(!endDay) ? actualDay : endDay}</p>
+            <p >{!endDay ? "Actualmente" : endDay}</p>
         </div>
         <p>{diff} dias</p>
     </div>
     <ul
-        class="w-full flex flex-col items-start justify-around grow list-disc list-inside"
+        class="w-full h-auto flex flex-col items-start  list-disc list-inside text-pretty"
     >
-        <li class="font-body text-heading-body">Skills</li>
-        <li class="font-body text-heading-body">Skills</li>
-        <li class="font-body text-heading-body">Skills</li>
+        {skills.map(s => (
+            <li class="font-body text-body-sm">{s}</li>
+        ))}
     </ul>
 </div>

@@ -1,6 +1,11 @@
 ---
 import TechBoard from "../components/TechBoard";
 ---
-<section id="Technologie" class="w-full h-full">
-    <TechBoard client:idle />
+<section id="Technologie" class="w-full h-full px-4 pt-[9dvh] border-2">
+    <div class="hidden lg:block w-full h-full border-2 border-red-500">
+        <TechBoard device={"desktop"} client:visible />
+    </div>
+    <div class="block lg:hidden w-full h-full border-2 border-green-500">
+        <TechBoard device={"mobile"} client:visible />
+    </div>
 </section>

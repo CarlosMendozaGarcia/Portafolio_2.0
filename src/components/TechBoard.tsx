@@ -35,8 +35,9 @@ const techStack = [
     { name: "Swiper.Js", proficiency: 30, type: "Others" },
 ];
 
-export default function TechBoard() {
-    const [state, setState] = useState("all");
+export default function TechBoard({ device }: { device: "desktop" | "mobile" }) {
+
+    const [state, setState] = device == "desktop" ? useState("all") : useState("FrontEnd");
 
     const layout = useMemo(() => {
         const filtered = state === "all"
@@ -53,15 +54,15 @@ export default function TechBoard() {
                 each: 0.05,
                 from: "random"
             },
-            scrollTrigger:{
-                trigger:"#Technologie"
+            scrollTrigger: {
+                trigger: "#Technologie"
             }
         })
         const cards = document.querySelectorAll(".tech-stack");
 
         cards.forEach((c) => {
             Draggable.create(c, {
-                bounds: "#Container",
+                bounds: "#board",
                 inertia: true,
                 onDrag: () => {
                     gsap.to(c, {
@@ -81,22 +82,22 @@ export default function TechBoard() {
         })
     }, [layout])
 
-    return <div className="flex flex-col w-full h-full px-4 pb-4 pt-[9dvh] gap-2 ">
+    return <div className="flex flex-col w-full h-full  ">
         <div
-            id="Container"
-            className="relative h-full w-full border-3 border-dashed border-primary rounded-xl"
+            id="board"
+            className="relative w-full h-full border-3 border-dashed border-primary rounded-xl"
         >
             <div
-                className="absolute h-full w-full grid grid-cols-20 grid-rows-10 grid-flow-dense gap-2 p-2 -z-10  "
+                className="absolute h-full w-full grid grid-cols-20 grid-rows-10 gap-2 p-2 -z-10  "
             >
                 {
                     Array.from({ length: 200 }, (v, i) => i).map((e) => (
-                        <div key={e} className="w-full h-full bg-secondary/20 col-span-1 row-span-1 rounded-lg border-4 border-secondary/30" />
+                        <div key={e} className=" bg-secondary/20 rounded-lg border-4 border-secondary/30" />
                     ))
                 }
             </div>
             <div
-                className="bg-transparent h-full w-full grid grid-cols-20 grid-rows-10 grid-flow-dense gap-2 p-2"
+                className="h-full w-full grid grid-cols-20 grid-rows-10 gap-2 p-2"
             >
                 {
                     layout.map((t: TechLayout) => (
@@ -105,16 +106,18 @@ export default function TechBoard() {
                 }
             </div>
         </div>
-        <div className="shrink-0 flex justify-center gap-2">
-            <button type="button" onClick={() => setState("all")} className={`${state == "all" ? "button-secondary-active": "button-secondary"} font-headings transition-colors duration-150`}>
-                Todos</button>
-            <button type="button" onClick={() => setState("FrontEnd")} className={`${state == "FrontEnd" ? "button-secondary-active": "button-secondary"} font-headings transition-colors duration-150`}>
+        <div className="flex shrink-0 justify-center gap-2">
+            {(device == "desktop") && (
+                <button type="button" onClick={() => setState("all")} className={`${state == "all" ? "button-secondary-active" : "button-secondary"} text-body-sm font-headings transition-colors duration-150`}>
+                    Todos</button>
+            )}
+            <button type="button" onClick={() => setState("FrontEnd")} className={`${state == "FrontEnd" ? "button-secondary-active" : "button-secondary"} text-body-sm font-headings transition-colors duration-150`}>
                 FrontEnd</button>
-            <button type="button" onClick={() => setState("BackEnd")} className={`${state == "BackEnd" ? "button-secondary-active": "button-secondary"} font-headings transition-colors duration-150`}>
+            <button type="button" onClick={() => setState("BackEnd")} className={`${state == "BackEnd" ? "button-secondary-active" : "button-secondary"} text-body-sm font-headings transition-colors duration-150`}>
                 BackEnd</button>
-            <button type="button" onClick={() => setState("Infrastructure")} className={`${state == "Infrastructure" ? "button-secondary-active": "button-secondary"} font-headings transition-colors duration-150`}>
+            <button type="button" onClick={() => setState("Infrastructure")} className={`${state == "Infrastructure" ? "button-secondary-active" : "button-secondary"} text-body-sm font-headings transition-colors duration-150`}>
                 Infraestructura</button>
-            <button type="button" onClick={() => setState("Others")} className={`${state == "Others" ? "button-secondary-active": "button-secondary"} font-headings transition-colors duration-150`}
+            <button type="button" onClick={() => setState("Others")} className={`${state == "Others" ? "button-secondary-active" : "button-secondary"} text-body-sm font-headings transition-colors duration-150`}
             >Librerias y Plugins</button>
         </div>
     </div>

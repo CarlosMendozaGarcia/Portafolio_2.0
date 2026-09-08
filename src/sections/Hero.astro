@@ -2,36 +2,71 @@
 import CarouselAdjectives from "../components/CarouselAdjectives.astro";
 ---
 
-<section id="Home" class="grid grid-cols-[3fr_2fr] w-full h-full p-4 border-2">
-    <div class="flex items-end justify-center p-4">
-        <div class="w-fit flex flex-col justify-end items-center gap-4">
-            <h1
-                class="w-fit text-center text-display leading-none font-display text-primary"
-            >
-                Carlos Andres Mendoza Garcia
-            </h1>
-            <ul
-                class="text-heading-sm font-headings uppercase w-full flex justify-between gap-1"
-            >
-                <li>Fullstack development</li>
-                <li>System architecture</li>
-                <li>Ux / Ui design</li>
-            </ul>
+<section id="Home" class="w-full h-full p-4">
+    <div class="hidden lg:grid lg:grid-cols-[3fr_2fr] w-full h-full">
+        <div class="flex items-end justify-center p-4">
+            <div class="w-fit flex flex-col justify-end items-center gap-4">
+                <h1
+                    class="w-fit text-center text-display leading-none font-display text-primary"
+                >
+                    Carlos Andres <br />Mendoza Garcia
+                </h1>
+                <ul
+                    class="text-heading-sm font-headings uppercase w-full flex justify-between gap-1"
+                >
+                    <li>Fullstack development</li>
+                    <li>System architecture</li>
+                    <li>Ux / Ui design</li>
+                </ul>
+            </div>
+        </div>
+        <div class="relative hidden lg:block"></div>
+
+        <div class="p-4">
+            <div class="w-full h-full border-2 border-primary">Foto</div>
+        </div>
+        <div class="flex justify-end items-center p-4">
+            <div class="relative flex flex-col items-center justify-end">
+                <h2
+                    class="text-center text-display-sm leading-none font-display text-primary"
+                >
+                    Ingeniero<br />de Sistemas
+                </h2>
+                <p class="text-body-lg font-body">Perfil profesional</p>
+                <CarouselAdjectives />
+            </div>
         </div>
     </div>
-    <div class="relative flex items-end justify-end"></div>
-
-    <div class="p-4">
-        <div class="w-full h-full border-2 border-primary">Foto</div>
-    </div>
-    <div class="flex justify-end items-center p-4">
-        <div class="relative flex flex-col items-center justify-end">
-            <h2
-                class=" text-center text-display-sm leading-none font-display text-primary"
-            >
-                Ingeniero<br />de Sistemas
-            </h2>
-            <p class="text-body-lg font-body">Perfil profesional</p>
+    <div class="grid grid-rows-3 lg:hidden w-full h-full ">
+        <div class="flex items-end justify-center">
+            <div class="w-fit flex flex-col justify-end items-center gap-4">
+                <h1
+                    class="w-fit text-center text-display leading-none font-display text-primary"
+                >
+                    Carlos Andres <br />Mendoza Garcia
+                </h1>
+                <ul
+                    class="text-heading-sm font-headings uppercase w-full flex justify-between gap-1"
+                >
+                    <li>Fullstack development</li>
+                    <li>System architecture</li>
+                    <li>Ux / Ui design</li>
+                </ul>
+            </div>
+        </div>
+        <div class="">
+            <div class="w-full h-full border-2 border-primary">Foto</div>
+        </div>
+        <div class="relative flex justify-between items-center ">
+            <div class="relative flex flex-col items-center justify-end">
+                <h2
+                    class="text-center text-display-sm leading-none font-display text-primary"
+                >
+                    Ingeniero<br />de Sistemas
+                </h2>
+                <p class="text-body-lg font-body">Perfil profesional</p>
+                
+            </div>
             <CarouselAdjectives />
         </div>
     </div>

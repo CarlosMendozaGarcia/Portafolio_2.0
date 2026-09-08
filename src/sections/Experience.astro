@@ -1,27 +1,28 @@
 ---
 import WorkCard from "../components/WorkCard.astro";
-const Jobs = [
-    {
-        id: 1,
-        company: "Arenas Inmobiliaria",
-        position: "Gestor de Desarrollo",
-        initialDate: "2025-10-14",
-    },
-    {
-        id: 2,
-        company: "RawForm",
-        position: "Desarrollador FrontEnd",
-        initialDate: "2026-02-14",
-        endDate: "2026-03-14",
-    },
-];
+import { Jobs } from "../data/work.data";
 ---
 
-<section id="Experience" class="w-full h-full">
-    <div id="Slider" class="flex w-full h-full overflow-hidden">
+<section id="Experience" class="relative flex w-full h-full">
+    <div
+        class="background absolute grid grid-cols-30 grid-rows-20 w-full h-full gap-1 pt-[9dvh] px-4 pb-4 -z-10"
+    >
+        {
+            Array.from({ length: 600 }, (v, i) => i).map((o) => (
+                <div class="will-change-grid " />
+            ))
+        }
+    </div>
+    <div
+        id="Slider"
+        class="flex w-full h-full overflow-hidden pt-[9dvh] px-4 pb-4"
+    >
         {
             Jobs.map((j) => (
-                <div id={`work_${j.id}`} class="shrink-0 flex justify-around items-center w-full h-full snap-start">
+                <div
+                    id={`work_${j.id}`}
+                    class="shrink-0 flex justify-around items-center w-full h-full snap-start"
+                >
                     <a
                         class={`${j.id == 1 ? "opacity-0 pointer-events-none" : "opacity-100"} text-heading-md font-display`}
                         href={`#work_${j.id - 1}`}
@@ -33,6 +34,7 @@ const Jobs = [
                         position={j.position}
                         initialDate={j.initialDate}
                         endDate={j.endDate}
+                        skills={j.skills}
                     />
                     <a
                         class={`${j.id == Jobs.length ? "opacity-0 pointer-events-none" : "opacity-100"} text-heading-md font-display`}
@@ -49,14 +51,58 @@ const Jobs = [
 <script>
     import { gsap } from "gsap";
     import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
     gsap.registerPlugin(ScrollToPlugin);
 
     const slides = document.querySelectorAll("#Slider a");
 
+    const cells = gsap.utils.toArray(".background > div") as HTMLElement[];
+
+    function getRandomCells(pool: HTMLElement[], count: number): HTMLElement[] {
+        const shuffled = [...pool].sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, count);
+    }
+
+    function animateRandomBatch(count: number) {
+        const targets = getRandomCells(cells, count);
+
+        gsap.fromTo(
+            targets,
+            { scale: 0.7, opacity: 0.2 },
+            {
+                scale: 1,
+                background: "var(--secondary)",
+                opacity: 0.8,
+                duration: 0.6,
+                ease: "power2.out",
+                stagger: {
+                    each: 0.03,
+                    from: "random", // orden random dentro de este batch
+                },
+                yoyo: true,
+                repeat: 1, // vuelve a su estado original
+            },
+        );
+    }
+
+    const batchSizes = [10, 15, 20, 25, 30];
+    let cycle = 0;
+
+    function runCycle() {
+        const count = batchSizes[cycle % batchSizes.length];
+        animateRandomBatch(count);
+        cycle++;
+    }
+
+    function loopCycles() {
+        runCycle();
+        gsap.delayedCall(1.5, loopCycles);
+    }
+    
     function scrollSlide(href: string) {
         gsap.to("#Slider", {
             duration: 1,
-            scrollTo:{x:href},
+            scrollTo: { x: href },
             ease: "power2.inOut",
         });
     }
@@ -71,5 +117,5 @@ const Jobs = [
             scrollSlide(href);
         });
     });
-
+    loopCycles();
 </script>
