@@ -5,7 +5,7 @@ import NavBar from "../components/NavBar.astro";
 <header class="fixed flex justify-between h-[8dvh] w-full px-4 py-2 z-20">
     <div class="h-full aspect-square rounded-sm bg-primary"></div>
     <div
-        class="relative font-semibold font-headings text-heading-md text-primary text-center grow"
+        class="relative font-semibold font-headings text-heading-lg leading-none items-center text-primary text-center grow"
     >
         <h2 id="title_0" class="absolute inset-0">Experiencia</h2>
         <h2 id="title_1" class="absolute inset-0">Tech stack</h2>
@@ -21,7 +21,6 @@ import NavBar from "../components/NavBar.astro";
     gsap.registerPlugin(ScrollTrigger, SplitText);
 
     const sections = ["#Experience", "#Technologie", "#Projects"];
-
     const titles = document.querySelectorAll("header h2");
 
     let i = 0;

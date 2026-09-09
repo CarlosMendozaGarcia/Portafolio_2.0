@@ -16,17 +16,17 @@ const { initDay, actualDay, endDay, diff } = Timer(initialDate, endDate);
 
 <!-- utilizar gsap para pasar y background -->
 <div
-    class="relative flex flex-col gap-2 items-start justify-center w-2/3   h-2/3  border-8 border-double border-secondary px-4 py-2 rounded-md bg-background"
+    class="relative flex flex-col gap-2 items-start justify-center  w-full lg:w-2/3   h-2/3  border-8 border-double border-secondary px-4 py-2 rounded-md bg-background"
 >
     <div class="flex items-center justify-between w-full ">
         <h3
-            class="leading-none font-headings text-heading-lg text-primary font-bold"
+            class="w-2/3 leading-none font-headings text-heading-lg text-primary font-bold"
         >
             {company}
         </h3>
         {
             !endDate && (
-                <div class=" size-10 bg-secondary rounded-full animate-pulse" />
+                <div class="size-8 lg:size-10 bg-secondary rounded-full animate-pulse" />
             )
         }
     </div>

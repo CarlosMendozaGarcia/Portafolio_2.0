@@ -1,15 +1,25 @@
-<nav 
-    class="w-2/3 lg:w-1/2 flex justify-between items-center border-2 rounded-sm px-2 backdrop-blur-sm bg-secondary/50"
+---
+import Menu from "/public/Menu.svg";
+import MenuButton from "./MenuButton";
+---
+
+<nav
+    class="relative flex justify-between items-center h-full border-2 border-primary rounded-sm px-2 backdrop-blur-sm bg-secondary/50 lg:grow"
 >
-    <div >
-        <ul class="flex gap-2 font-headings">
+    <div class="hidden lg:block w-full">
+        <ul class="flex justify-between gap-2 font-headings">
             <a href="#Home">Home</a>
             <a href="#Experience">Experiencia</a>
             <a href="#Technologie">Tech Stack</a>
             <a href="#Projects">Proyectos</a>
+            <a href="">Mi C.V. </a>
         </ul>
     </div>
-    <div>Get my cv</div>
+    <div class="block lg:hidden h-full w-auto">
+        <MenuButton client:visible >
+            <Menu/>
+        </MenuButton>
+    </div>
 </nav>
 
 <script>

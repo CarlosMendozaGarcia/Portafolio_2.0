@@ -44,9 +44,9 @@ import { Projects } from "../data/projects.data";
                 return (
                     <div
                         id={"project_" + i.toString()}
-                        class="projects absolute flex shrink-0 h-full w-full "
+                        class="projects absolute flex flex-col lg:flex-row shrink-0 h-full w-full "
                     >
-                        <div class="flex flex-col justify-evenly w-1/2 p-2">
+                        <div class="flex flex-col justify-evenly grow w-full lg:w-1/2 p-2">
                             <div class="flex flex-col gap-2">
                                 <h2 class="font-headings text-heading-md text-primary font-bold">
                                     {p.title}
@@ -85,7 +85,7 @@ import { Projects } from "../data/projects.data";
                         </div>
                         <div
                             id="Image"
-                            class="flex relative w-1/2 h-full rounded-xl overflow-hidden"
+                            class="flex relative w-full lg:w-1/2 h-1/2 rounded-xl overflow-hidden"
                         >
                             <Image
                                 src={image}
