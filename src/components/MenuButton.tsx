@@ -17,7 +17,7 @@ export default function MenuButton({ children }: { children: React.ReactNode }) 
             tl.to("#Menu",{
                 maxHeight:200,
                 maxWidth:200,
-                opacity:1
+                opacity:1,
             }).to(".links-menu",{
                 opacity:1,
                 xPercent:0
@@ -39,12 +39,12 @@ export default function MenuButton({ children }: { children: React.ReactNode }) 
         
     }
 
-    return <div className="h-full w-auto aspect-square text-background ">
-        <button type="button" onClick={onClick} className="w-full h-full ">
+    return <div className="h-full w-full aspect-square text-background ">
+        <button type="button" onClick={onClick} className="w-full h-full backdrop-blur-sm">
             {children}
         </button>
-        <div id="Menu" className="absolute right-0 top-full+1 border-2 max-w-0 max-h-0 opacity-0 p-4  bg-secondary/50 backdrop-blur-sm  border-primary overflow-hidden">
-            <ul className="flex flex-col justify-between gap-2 font-headings ">
+        <div id="Menu" className="absolute right-0 top-full+1 border-2 max-w-0 max-h-0 opacity-0 p-4 bg-secondary/50  backdrop-blur-sm border-primary overflow-hidden ">
+            <ul className="flex flex-col justify-between gap-2 font-headings w-full h-full bac">
                 <a className="links-menu" href="#Home">Home</a>
                 <a className="links-menu" href="#Experience">Experiencia</a>
                 <a className="links-menu" href="#Technologie">Tech Stack</a>

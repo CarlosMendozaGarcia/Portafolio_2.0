@@ -58,11 +58,13 @@ export default function TechBoard({ device }: { device: "desktop" | "mobile" }) 
                 trigger: "#Technologie"
             }
         })
+
         const cards = document.querySelectorAll(".tech-stack");
 
         cards.forEach((c) => {
-            Draggable.create(c, {
-                bounds: "#board",
+            let cDrag = Draggable.create(c, {
+                type:"x,y",
+                bounds: `#board_${device}`,
                 inertia: true,
                 onDrag: () => {
                     gsap.to(c, {
@@ -79,12 +81,13 @@ export default function TechBoard({ device }: { device: "desktop" | "mobile" }) 
                     });
                 },
             })
+            Draggable.zIndex=10
         })
     }, [layout])
 
     return <div className="flex flex-col w-full h-full  ">
         <div
-            id="board"
+            id={`board_${device}`}
             className="relative w-full h-full border-3 border-dashed border-primary rounded-xl"
         >
             <div

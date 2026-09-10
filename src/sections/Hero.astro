@@ -28,7 +28,7 @@ import CarouselAdjectives from "../components/CarouselAdjectives.astro";
         <div class="relative"></div>
         <div class="relative p-4 w-full h-full overflow-hidden">
             <div
-                class="w-full h-full bg-[url(../assets/Foto.webp)] bg-cover bg-center border-2 border-primary rounded-md overflow-hidden"
+                class={`w-full h-full bg-[url(${Foto.src})] bg-cover bg-center border-2 border-primary rounded-md overflow-hidden`}
             >
                 <Image
                     src={Foto}

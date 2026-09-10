@@ -4,10 +4,10 @@ import MenuButton from "./MenuButton";
 ---
 
 <nav
-    class="relative flex justify-between items-center h-full border-2 border-primary rounded-sm px-2 backdrop-blur-sm bg-secondary/50 lg:grow"
+    class="relative flex justify-between items-center h-full border-2 border-primary rounded-sm   bg-secondary/50 lg:grow"
 >
-    <div class="hidden lg:block w-full">
-        <ul class="flex justify-between gap-2 font-headings">
+    <div class="hidden lg:block  w-full  h-full backdrop-blur-sm px-2">
+        <ul class="flex items-center justify-between h-full gap-2 font-headings">
             <a href="#Home">Home</a>
             <a href="#Experience">Experiencia</a>
             <a href="#Technologie">Tech Stack</a>
@@ -15,7 +15,7 @@ import MenuButton from "./MenuButton";
             <a href="/public/Carlos_Mendoza_C_V_.pdf" class="button-primary hover:scale-105 active:brightness-125 transition-all duration-150">Mi C.V. </a>
         </ul>
     </div>
-    <div class="block lg:hidden h-full w-auto">
+    <div class="block lg:hidden  h-full ">
         <MenuButton client:visible >
             <Menu/>
         </MenuButton>
