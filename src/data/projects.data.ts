@@ -3,7 +3,7 @@ import Casamigos_1 from "../assets/Casamigos_1.png";
 import ConnectLatam from "../assets/Connect_Latam_VT.png";
 import ConnectLatam_1 from "../assets/Connect_Latam_VT_1.png"
 import PriceHive from "../assets/PriceHive.png";
-import CarPool from "../assets/CarPool.png";
+import CarPool from "../assets/Carpool.png";
 
 type Project = {
     title: string,
