@@ -1,7 +1,7 @@
 ---
 import WorkCard from "../components/WorkCard.astro";
-import Left from "/public/Left.svg";
-import Right from "/public/Right.svg";
+import Left from "../assets/Left.svg";
+import Right from "../assets/Right.svg";
 import { Jobs } from "../data/work.data";
 ---
 
@@ -11,7 +11,7 @@ import { Jobs } from "../data/work.data";
     >
         {
             Array.from({ length: 600 }, (v, i) => i).map((o) => (
-                <div class="will-change-grid " />
+                <div class={`will-change-grid mask-[url(../assets/Stars.svg)] mask-center mask-no-repeat`} />
             ))
         }
     </div>
@@ -70,9 +70,9 @@ import { Jobs } from "../data/work.data";
 
         gsap.fromTo(
             targets,
-            { scale: 0.7, opacity: 0.2 },
+            { scale: 1, opacity: 0.2 },
             {
-                scale: 1,
+                scale: 1.5,
                 background: "var(--secondary)",
                 opacity: 0.8,
                 duration: 0.6,

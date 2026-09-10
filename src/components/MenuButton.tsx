@@ -20,8 +20,8 @@ export default function MenuButton({ children }: { children: React.ReactNode }) 
                 opacity:1
             }).to(".links-menu",{
                 opacity:1,
-                xPercent:100
-            })
+                xPercent:0
+            },">")
         }else{
             tl.to(".links-menu",{
                 opacity:0,
@@ -30,7 +30,7 @@ export default function MenuButton({ children }: { children: React.ReactNode }) 
                 maxHeight:0,
                 maxWidth:0,
                 opacity:0
-            })
+            },">")
         }
     }, [toogle])
 
@@ -43,13 +43,13 @@ export default function MenuButton({ children }: { children: React.ReactNode }) 
         <button type="button" onClick={onClick} className="w-full h-full ">
             {children}
         </button>
-        <div id="Menu" className="absolute right-0 top-full+1 border-2 max-w-0 max-h-0 opacity-0 p-4  bg-secondary/50 backdrop-blur-sm  border-primary">
-            <ul className="flex flex-col justify-between gap-2 font-headings opacity-0">
+        <div id="Menu" className="absolute right-0 top-full+1 border-2 max-w-0 max-h-0 opacity-0 p-4  bg-secondary/50 backdrop-blur-sm  border-primary overflow-hidden">
+            <ul className="flex flex-col justify-between gap-2 font-headings ">
                 <a className="links-menu" href="#Home">Home</a>
                 <a className="links-menu" href="#Experience">Experiencia</a>
                 <a className="links-menu" href="#Technologie">Tech Stack</a>
                 <a className="links-menu" href="#Projects">Proyectos</a>
-                <a className="links-menu" href="">Mi C.V. </a>
+                <a className="links-menu button-primary active:button-primary-active transition-all duration-150" href="/public/Carlos_Mendoza_C_V_.pdf">Mi C.V. </a>
             </ul>
         </div>
     </div>
