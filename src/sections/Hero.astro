@@ -19,9 +19,9 @@ import CarouselAdjectives from "../components/CarouselAdjectives.astro";
                 <ul
                     class="text-heading-sm font-headings uppercase w-full flex justify-between gap-1"
                 >
-                    <li>Fullstack development</li>
-                    <li>System architecture</li>
-                    <li>Ux / Ui design</li>
+                    <li class="text-secondary border-2 text-center rounded-sm ">Fullstack development</li>
+                    <li class="text-secondary border-2 text-center rounded-sm ">System architecture</li>
+                    <li class="text-secondary border-2 text-center rounded-sm ">Ux / Ui design</li>
                 </ul>
             </div>
         </div>
@@ -44,13 +44,13 @@ import CarouselAdjectives from "../components/CarouselAdjectives.astro";
                 >
                     Ingeniero<br />de Sistemas
                 </h2>
-                <p class="text-body-lg font-body">Perfil profesional</p>
+                <p class="text-pretty text-center text-body-lg font-body">Ingeniero de Sistemas y Computación con experiencia en <strong class="text-secondary">Desarrollo FrontEnd</strong>, <strong class="text-secondary">SEO</strong>, <strong class="text-secondary">Diseño responsive</strong> y <strong class="text-secondary">experiencia UI /UX</strong></p>
                 <CarouselAdjectives />
             </div>
         </div>
     </div>
     <!-- Mobile -->
-    <div class="grid grid-rows-3 lg:hidden w-full h-full">
+    <div class="grid grid-rows-3 gap-3 lg:hidden w-full h-full">
         <div class="flex items-end justify-center">
             <div class="w-fit flex flex-col justify-end items-center gap-4">
                 <h1
@@ -59,17 +59,17 @@ import CarouselAdjectives from "../components/CarouselAdjectives.astro";
                     Carlos Andres <br />Mendoza Garcia
                 </h1>
                 <ul
-                    class="text-heading-sm font-headings uppercase w-full flex justify-between gap-1"
+                    class="text-heading-sm font-headings uppercase w-full flex justify-between gap-3"
                 >
-                    <li>Fullstack development</li>
-                    <li>System architecture</li>
-                    <li>Ux / Ui design</li>
+                    <li class="text-secondary border-2 px-1 rounded-sm ">Fullstack development</li>
+                    <li class="text-secondary border-2 px-1 rounded-sm ">System architecture</li>
+                    <li class="text-secondary border-2 px-1 rounded-sm ">Ux / Ui design</li>
                 </ul>
             </div>
         </div>
         <div class="relative w-full h-full ">
             <div
-                class="w-full h-full bg-[url(../assets/Foto.webp)] bg-cover bg-center border-2 border-primary rounded-md overflow-hidden"
+                class={`w-full h-full bg-[url(${Foto.src})] bg-cover bg-center border-2 border-primary rounded-md overflow-hidden`}
             >
                 <Image
                     src={Foto}
@@ -79,13 +79,13 @@ import CarouselAdjectives from "../components/CarouselAdjectives.astro";
             </div>
         </div>
         <div class="relative flex justify-between items-center">
-            <div class="relative flex flex-col items-center justify-end">
+            <div class="relative w-1/2 flex flex-col items-center justify-end">
                 <h2
                     class="text-center text-display-sm leading-none font-display text-primary"
                 >
                     Ingeniero<br />de Sistemas
                 </h2>
-                <p class="text-body-lg font-body">Perfil profesional</p>
+                <p class=" text-center text-pretty text-body-sm font-body">Ingeniero de Sistemas y Computación con experiencia en <strong class="text-secondary">Desarrollo FrontEnd</strong>, <strong class="text-secondary">SEO</strong>, <strong class="text-secondary">Diseño responsive</strong> y <strong class="text-secondary">experiencia UI /UX</strong></p>
             </div>
             <CarouselAdjectives />
         </div>
