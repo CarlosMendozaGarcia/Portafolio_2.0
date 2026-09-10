@@ -49,7 +49,7 @@ export default function MenuButton({ children }: { children: React.ReactNode }) 
                 <a className="links-menu" href="#Experience">Experiencia</a>
                 <a className="links-menu" href="#Technologie">Tech Stack</a>
                 <a className="links-menu" href="#Projects">Proyectos</a>
-                <a className="links-menu button-primary active:button-primary-active transition-all duration-150" href="/public/Carlos_Mendoza_C_V_.pdf">Mi C.V. </a>
+                <a className="links-menu button-primary active:button-primary-active transition-all duration-150" href="/Carlos_Mendoza_C_V_.pdf">Mi C.V. </a>
             </ul>
         </div>
     </div>
