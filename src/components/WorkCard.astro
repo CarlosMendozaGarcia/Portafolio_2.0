@@ -33,13 +33,13 @@ const { initDay, actualDay, endDay, diff } = Timer(initialDate, endDate);
     <h4 class="font-headings text-heading-md text-secondary font-semibold">
         {position}
     </h4>
-    <div class="w-full flex justify-between font-display text-body">
-        <div class="flex gap-2">
+    <div class="w-full flex justify-between items-center  font-display text-body-lg">
+        <div class="flex justify-start items-center gap-2">
             <p >{initDay}</p>
             -
-            <p >{!endDay ? "Actualmente" : endDay}</p>
+            <p >{!endDay ? "Presente" : endDay}</p>
         </div>
-        <p>{diff} dias</p>
+        <p class="text-center">{diff} dias</p>
     </div>
     <ul
         class="w-full h-auto flex flex-col items-start  list-disc list-inside text-pretty"

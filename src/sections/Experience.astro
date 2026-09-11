@@ -11,14 +11,13 @@ import { Jobs } from "../data/work.data";
     >
         {
             Array.from({ length: 600 }, (v, i) => i).map((o) => (
-                <div class={`will-change-grid mask-[url(../assets/Stars.svg)] mask-center mask-no-repeat`} />
+                <div
+                    class={`will-change-grid mask-[url(../assets/Stars.svg)] mask-center mask-no-repeat`}
+                />
             ))
         }
     </div>
-    <div
-        id="Slider"
-        class="flex w-full h-full overflow-hidden pt-[9dvh] pb-4 "
-    >
+    <div id="Slider" class="flex w-full h-full overflow-hidden pt-[9dvh] pb-4">
         {
             Jobs.map((j) => (
                 <div
@@ -29,7 +28,7 @@ import { Jobs } from "../data/work.data";
                         class={`${j.id == 1 ? "opacity-0 pointer-events-none hidden md:block" : "opacity-100"} shrink-0 text-heading-md font-display size-10 text-secondary bg-background/50 backdrop-blur-xs border-2 rounded-full stroke-2 stroke-primary`}
                         href={`#work_${j.id - 1}`}
                     >
-                        <Left/>
+                        <Left />
                     </a>
                     <WorkCard
                         company={j.company}
@@ -42,7 +41,7 @@ import { Jobs } from "../data/work.data";
                         class={`${j.id == Jobs.length ? "opacity-0 pointer-events-none hidden md:block" : "opacity-100"} shrink-0 text-heading-md font-display size-10 text-secondary bg-background/50 backdrop-blur-xs border-2  rounded-full stroke-2 stroke-primary`}
                         href={`#work_${j.id + 1}`}
                     >
-                        <Right/>
+                        <Right />
                     </a>
                 </div>
             ))
@@ -66,9 +65,15 @@ import { Jobs } from "../data/work.data";
     }
 
     function animateRandomBatch(count: number) {
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#Experience",
+                toggleActions: "play pause resume play"
+            },
+        });
         const targets = getRandomCells(cells, count);
 
-        gsap.fromTo(
+        tl.fromTo(
             targets,
             { scale: 1, opacity: 0.2 },
             {
@@ -87,20 +92,11 @@ import { Jobs } from "../data/work.data";
         );
     }
 
-    const batchSizes = [10, 15, 20, 25, 30];
-    let cycle = 0;
-
-    function runCycle() {
-        const count = batchSizes[cycle % batchSizes.length];
-        animateRandomBatch(count);
-        cycle++;
-    }
-
     function loopCycles() {
-        runCycle();
+        animateRandomBatch(20);
         gsap.delayedCall(1.5, loopCycles);
     }
-    
+
     function scrollSlide(href: string) {
         gsap.to("#Slider", {
             duration: 1,
@@ -119,5 +115,6 @@ import { Jobs } from "../data/work.data";
             scrollSlide(href);
         });
     });
+
     loopCycles();
 </script>

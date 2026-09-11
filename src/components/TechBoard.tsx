@@ -8,37 +8,13 @@ import { useState, useMemo, useEffect } from "react";
 
 import TechStack from "./TechStack";
 import layoutTechStack, { type TechLayout } from "../lib/layoutTechStack";
+import { techData as techStack } from "../data/tech.data";
 
-const techStack = [
-    { name: "HTML5", proficiency: 70, type: "FrontEnd" },
-    { name: "CSS3", proficiency: 70, type: "FrontEnd" },
-    { name: "Javascript", proficiency: 60, type: "FrontEnd" },
-    { name: "Typescript", proficiency: 60, type: "FrontEnd" },
-    { name: "React", proficiency: 70, type: "FrontEnd" },
-    { name: "Next.Js", proficiency: 70, type: "FrontEnd" },
-    { name: "Astro.Js", proficiency: 40, type: "FrontEnd" },
-    { name: "Tailwind CSS", proficiency: 70, type: "FrontEnd" },
-    { name: "Node.js", proficiency: 30, type: "BackEnd" },
-    { name: "Express.js", proficiency: 30, type: "BackEnd" },
-    { name: "Python", proficiency: 30, type: "BackEnd" },
-    { name: "Java", proficiency: 30, type: "BackEnd" },
-    { name: "MongoDB", proficiency: 30, type: "Infrastructure" },
-    { name: "SQL", proficiency: 30, type: "Infrastructure" },
-    { name: "Firebase", proficiency: 20, type: "Infrastructure" },
-    { name: "Vercel", proficiency: 40, type: "Infrastructure" },
-    { name: "Netlify", proficiency: 40, type: "Infrastructure" },
-    { name: "Coolify", proficiency: 50, type: "Infrastructure" },
-    { name: "GSAP", proficiency: 20, type: "Others" },
-    { name: "ZuStand", proficiency: 30, type: "Others" },
-    { name: "Next-Intl", proficiency: 10, type: "Others" },
-    { name: "Next-Auth", proficiency: 10, type: "Others" },
-    { name: "Swiper.Js", proficiency: 30, type: "Others" },
-];
 
-export default function TechBoard({ device }: { device: "desktop" | "mobile" }) {
+export default function TechBoard() {
 
-    const [state, setState] = device == "desktop" ? useState("all") : useState("FrontEnd");
-
+    const [state, setState] = useState("all")
+    let techBoardTl: GSAPTimeline | null = null;
     const layout = useMemo(() => {
         const filtered = state === "all"
             ? techStack
@@ -47,7 +23,14 @@ export default function TechBoard({ device }: { device: "desktop" | "mobile" }) 
     }, [state]);
 
     useEffect(() => {
-        gsap.from(".tech-stack", {
+
+        if (techBoardTl) techBoardTl.kill()
+
+        techBoardTl = gsap.timeline({
+            ease: "power1.inOut"
+        })
+
+        techBoardTl.from(".tech-stack", {
             opacity: 0,
             scale: 0,
             stagger: {
@@ -63,8 +46,8 @@ export default function TechBoard({ device }: { device: "desktop" | "mobile" }) 
 
         cards.forEach((c) => {
             let cDrag = Draggable.create(c, {
-                type:"x,y",
-                bounds: `#board_${device}`,
+                type: "x,y",
+                bounds: `#board_desktop`,
                 inertia: true,
                 onDrag: () => {
                     gsap.to(c, {
@@ -81,13 +64,13 @@ export default function TechBoard({ device }: { device: "desktop" | "mobile" }) 
                     });
                 },
             })
-            Draggable.zIndex=10
+            Draggable.zIndex = 10
         })
     }, [layout])
 
     return <div className="flex flex-col w-full h-full  ">
         <div
-            id={`board_${device}`}
+            id={`board_desktop`}
             className="relative w-full h-full border-3 border-dashed border-primary rounded-xl"
         >
             <div
@@ -109,19 +92,18 @@ export default function TechBoard({ device }: { device: "desktop" | "mobile" }) 
                 }
             </div>
         </div>
-        <div className="flex shrink-0 justify-center gap-2">
-            {(device == "desktop") && (
-                <button type="button" onClick={() => setState("all")} className={`${state == "all" ? "button-secondary-active" : "button-secondary"} text-body-sm font-headings transition-colors duration-150`}>
-                    Todos</button>
-            )}
+        <div className="flex  shrink-0 justify-center gap-2">
+
+            <button type="button" onClick={() => setState("all")} className={`${state == "all" ? "button-secondary-active" : "button-secondary"} text-body-sm font-headings transition-colors duration-150`}>
+                Todos</button>
             <button type="button" onClick={() => setState("FrontEnd")} className={`${state == "FrontEnd" ? "button-secondary-active" : "button-secondary"} text-body-sm font-headings transition-colors duration-150`}>
                 FrontEnd</button>
             <button type="button" onClick={() => setState("BackEnd")} className={`${state == "BackEnd" ? "button-secondary-active" : "button-secondary"} text-body-sm font-headings transition-colors duration-150`}>
                 BackEnd</button>
             <button type="button" onClick={() => setState("Infrastructure")} className={`${state == "Infrastructure" ? "button-secondary-active" : "button-secondary"} text-body-sm font-headings transition-colors duration-150`}>
                 Infraestructura</button>
-            <button type="button" onClick={() => setState("Others")} className={`${state == "Others" ? "button-secondary-active" : "button-secondary"} text-body-sm font-headings transition-colors duration-150`}
-            >Librerias y Plugins</button>
+            <button type="button" onClick={() => setState("Others")} className={`${state == "Others" ? "button-secondary-active" : "button-secondary"} whitespace-normal text-body-sm font-headings transition-colors duration-150`}
+            >Librerias</button>
         </div>
     </div>
 }
