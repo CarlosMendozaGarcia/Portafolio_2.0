@@ -10,6 +10,7 @@ import NavBar from "../components/NavBar.astro";
         <h2 id="title_0" class="absolute inset-0">Experiencia</h2>
         <h2 id="title_1" class="absolute inset-0">Tech stack</h2>
         <h2 id="title_2" class="absolute inset-0">Proyectos</h2>
+        <h2 id="title_3" class="absolute inset-0">Contacto</h2>
     </div>
     <NavBar />
 </header>
@@ -20,7 +21,7 @@ import NavBar from "../components/NavBar.astro";
     import { SplitText } from "gsap/SplitText";
     gsap.registerPlugin(ScrollTrigger, SplitText);
 
-    const sections = ["#Experience", "#Technologie", "#Projects"];
+    const sections = ["#Experience", "#Technologie", "#Projects", "#Contact"];
     const titles = document.querySelectorAll("header h2");
 
     let i = 0;

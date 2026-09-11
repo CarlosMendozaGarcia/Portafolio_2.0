@@ -1,10 +1,10 @@
 <div
     id="container-carousel"
-    class=" absolute  h-58 w-1/2 lg:w-full right-0 lg:bottom-full overflow-y-hidden mask-y-from-80% mask-y-to-95% text-secondary text-body-lg"
+    class="absolute h-58 w-1/2 lg:w-full right-0 lg:bottom-full overflow-y-hidden mask-y-from-80% mask-y-to-95% text-secondary text-body-lg"
 >
     <div
         id="carousel-adjective"
-        class="grid text-right  items-end font-headings uppercase right-0 bottom-full"
+        class="grid text-right items-end font-headings uppercase right-0 bottom-full"
     >
         <p class="adjectives">[Resiliente]</p>
         <p class="adjectives">[Adaptable]</p>
@@ -28,12 +28,10 @@
     import { ScrollTrigger } from "gsap/ScrollTrigger";
     gsap.registerPlugin(ScrollTrigger);
 
-    // el scroll infinito, SIN onUpdate ahora
-    const scrollTween = gsap.to("#carousel-adjective", {
+    gsap.to("#carousel-adjective", {
         y: -120,
         ease: "none",
         duration: 10,
-        repeat: -1, 
+        repeat: -1,
     });
-    scrollTween
 </script>
