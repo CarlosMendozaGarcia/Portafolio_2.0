@@ -1,0 +1,36 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="flex flex-col h-[25dvh] bg-primary text-background px-4">
+    <div class="flex items-center justify-around grow divide-x-2 py-4">
+        <div class="flex items-center justify-center gap-4 h-full w-full ">
+            <div class="h-2/3 w-auto aspect-square rounded-md bg-secondary">
+            </div>
+            <div class="flex flex-col ">
+                <span>Carlos Andres Mendoza Garcia</span>
+                <span>OrionByPixel</span>
+                <span>Ideas x Code x Pixel</span>
+            </div>
+        </div>
+        <div
+            class="flex flex-col items-center justify-center h-full w-full gap-1"
+        >
+            <span>Experiencia</span>
+            <span>Tech Stack</span>
+            <span>Proyectos</span>
+            <span>Contacto</span>
+        </div>
+        <div
+            class="flex flex-col items-center justify-center h-full w-full gap-1"
+        >
+            <span>Github</span>
+            <span>Linkedin</span>
+            <span>Email</span>
+        </div>
+    </div>
+    <div class="flex flex-col gap-2 w-full items-center">
+        <span>&copy; {year} Carlos Andres Mendoza Garcia</span>
+        <span>Built with Astro</span>
+    </div>
+</footer>
